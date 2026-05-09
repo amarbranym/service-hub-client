@@ -1,8 +1,9 @@
 import type { SignupFormValues } from "@/features/auth/schemas";
 
-const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL || "http://localhost:5000/api/v1";
+const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL || "https://service-hub-server-5nb1bcdwi-amarjeet-singhs-projects-c89de4be.vercel.app/api/v1";
 
 export const PENDING_SIGNUP_STORAGE_KEY = "servicehub:pending-signup";
+export const PENDING_LOGIN_STORAGE_KEY = "servicehub:pending-login";
 
 type ApiResponse<T> = {
   success: boolean;
@@ -71,6 +72,36 @@ export async function chooseRole(token: string, role: AppRole): Promise<AuthSucc
       Authorization: `Bearer ${token}`,
     },
     body: JSON.stringify({ role }),
+  });
+
+  if (!response.ok) {
+    throw new Error(await readApiErrorMessage(response));
+  }
+
+  const payload = (await response.json()) as ApiResponse<AuthSuccessPayload>;
+  return payload.data;
+}
+
+export async function sendLoginOtp(email: string): Promise<{ message: string }> {
+  const response = await fetch(`${API_BASE_URL}/auth/login/send-otp`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ email }),
+  });
+
+  if (!response.ok) {
+    throw new Error(await readApiErrorMessage(response));
+  }
+
+  const payload = (await response.json()) as ApiResponse<null>;
+  return { message: payload.message || "Login OTP sent successfully." };
+}
+
+export async function loginWithOtp(input: { email: string; otp: string }): Promise<AuthSuccessPayload> {
+  const response = await fetch(`${API_BASE_URL}/auth/login/verify-otp`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(input),
   });
 
   if (!response.ok) {

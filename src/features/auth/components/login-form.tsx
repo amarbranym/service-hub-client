@@ -1,16 +1,24 @@
 "use client";
 
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Mail } from "lucide-react";
+import { useMutation } from "@tanstack/react-query";
+import { Loader2, Mail } from "lucide-react";
+import { useState } from "react";
 import { useForm } from "react-hook-form";
 
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { PENDING_LOGIN_STORAGE_KEY, sendLoginOtp } from "@/features/auth/api/auth-api";
 import { LoginFormValues, loginSchema } from "@/features/auth/schemas";
 import { cn } from "@/lib/utils";
 
 export function LoginForm() {
+  const router = useRouter();
+  const [isLoginLoading, setIsLoginLoading] = useState(false);
+  const [apiError, setApiError] = useState("");
+
   const {
     register,
     handleSubmit,
@@ -23,9 +31,22 @@ export function LoginForm() {
     },
   });
 
+  const sendLoginOtpMutation = useMutation({
+    mutationFn: sendLoginOtp,
+  });
+
   const onSubmit = async (values: LoginFormValues) => {
-    // Step-1 only. OTP verification is the next screen.
-    console.log("login-step-1", values);
+    try {
+      setApiError("");
+      setIsLoginLoading(true);
+      await sendLoginOtpMutation.mutateAsync(values.email);
+      sessionStorage.setItem(PENDING_LOGIN_STORAGE_KEY, values.email);
+      router.push("/verify-login-otp");
+    } catch (error) {
+      setApiError(error instanceof Error ? error.message : "Failed to send login OTP.");
+    } finally {
+      setIsLoginLoading(false);
+    }
   };
 
   return (
@@ -65,8 +86,17 @@ export function LoginForm() {
           {errors.email ? <p className="text-xs text-destructive">{errors.email.message}</p> : null}
         </div>
 
-        <Button type="submit" className="h-10 w-full rounded-md" disabled={isSubmitting}>
-          {isSubmitting ? "Please wait..." : "Continue"}
+        {apiError ? <p className="text-xs text-destructive">{apiError}</p> : null}
+
+        <Button type="submit" className="h-10 w-full rounded-md" disabled={isSubmitting || isLoginLoading}>
+          {isSubmitting || isLoginLoading ? (
+            <span className="inline-flex items-center gap-2">
+              <Loader2 className="size-4 animate-spin" />
+              Logging in...
+            </span>
+          ) : (
+            "Continue"
+          )}
         </Button>
       </form>
 
