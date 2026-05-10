@@ -13,7 +13,7 @@ const categories = [
 
 export function PopularCategoriesSection() {
   return (
-    <section className="bg-background py-16 md:py-20">
+    <section id="categories" className="bg-background py-16 md:py-20">
       <Container>
         <div className="flex items-end justify-between gap-4">
           <h2 className="text-3xl font-semibold tracking-tight md:text-5xl">Popular Categories</h2>

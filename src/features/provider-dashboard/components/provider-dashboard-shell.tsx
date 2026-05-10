@@ -11,6 +11,7 @@ import {
   LogOut,
   MessageSquare,
   Settings,
+  Home,
 } from "lucide-react";
 
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
@@ -114,7 +115,13 @@ export function ProviderDashboardShell({ title, subtitle, action, children }: Pr
         </SidebarContent>
 
         <SidebarFooter className="p-3">
-          <SidebarSeparator />
+          <SidebarSeparator className="mb-2" />
+          <Button variant="ghost" className="justify-start " >
+            <Link href="/" className="flex items-center gap-2">
+              <Home />
+              Back to Site
+            </Link>
+          </Button>
           <Button variant="ghost" className="justify-start">
             <CircleHelp />
             Help Center

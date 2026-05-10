@@ -33,6 +33,7 @@ const services = [
     rating: "4.9",
     description: "Specializing in multi-room deep cleaning and sanitization for modern family homes.",
     badge: "Eco Friendly",
+    image: "https://picsum.photos/seed/clean1/600/400",
   },
   {
     name: "Sparkle & Shine Co.",
@@ -40,6 +41,7 @@ const services = [
     rating: "4.7",
     description: "Reliable weekly or bi-weekly maintenance cleaning for busy professionals.",
     badge: "Flexible Scheduling",
+    image: "https://picsum.photos/seed/clean2/600/400",
   },
   {
     name: "Precision Pro Clean",
@@ -47,6 +49,7 @@ const services = [
     rating: "5.0",
     description: "Premium move-in/out services with a 100% deposit back guarantee.",
     badge: "Guaranteed",
+    image: "https://picsum.photos/seed/clean3/600/400",
   },
   {
     name: "Pure Earth Clean",
@@ -54,6 +57,7 @@ const services = [
     rating: "4.8",
     description: "All-natural cleaning for sensitive households. We use toxin-free products.",
     badge: "Pet Safe",
+    image: "https://picsum.photos/seed/clean4/600/400",
   },
   {
     name: "The Home Concierge",
@@ -61,6 +65,7 @@ const services = [
     rating: "4.6",
     description: "Full house management including cleaning, laundry, and organization services.",
     badge: "All-Inclusive",
+    image: "https://picsum.photos/seed/clean5/600/400",
   },
   {
     name: "Upholstery Experts",
@@ -68,6 +73,7 @@ const services = [
     rating: "4.9",
     description: "Specialized cleaning for sofas, carpets, and luxury fabrics using steam tech.",
     badge: "Specialist",
+    image: "https://picsum.photos/seed/clean6/600/400",
   },
 ];
 

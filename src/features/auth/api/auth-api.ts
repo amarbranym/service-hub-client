@@ -1,6 +1,6 @@
 import type { SignupFormValues } from "@/features/auth/schemas";
 
-const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL || "https://service-hub-server-5nb1bcdwi-amarjeet-singhs-projects-c89de4be.vercel.app/api/v1";
+const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL || "https://service-hub-server-roan.vercel.app/api/v1";
 
 export const PENDING_SIGNUP_STORAGE_KEY = "servicehub:pending-signup";
 export const PENDING_LOGIN_STORAGE_KEY = "servicehub:pending-login";

@@ -10,15 +10,19 @@ type ServiceCardProps = {
   rating: string;
   description: string;
   badge: string;
+  image?: string;
 };
 
-export function ServiceCard({ name, price, rating, description, badge }: ServiceCardProps) {
+export function ServiceCard({ name, price, rating, description, badge, image }: ServiceCardProps) {
   return (
     <Card className="overflow-hidden bg-card transition hover:-translate-y-0.5 hover:shadow-md">
-      <CardContent className="p-0">
-        <div className="relative h-36 bg-linear-to-br from-muted to-secondary/45">
-          <span className="absolute right-2 top-2 inline-flex items-center gap-1 rounded-full bg-card px-2 py-1 text-xs font-semibold text-muted-foreground">
-            <Star className="size-3 fill-primary text-primary" />
+      <CardContent className="p-0 -mt-4">
+        <div className="relative h-48 bg-linear-to-br from-muted to-secondary/45 overflow-hidden">
+          {image ? (
+            <img src={image} alt={name} className="h-full w-full object-cover transition-transform duration-500 hover:scale-105" />
+          ) : null}
+          <span className="absolute right-3 top-3 inline-flex items-center gap-1 rounded-full bg-background/90 px-2 py-1 text-xs font-bold shadow-sm backdrop-blur-sm text-foreground">
+            <Star className="size-3.5 fill-primary text-primary" />
             {rating}
           </span>
         </div>

@@ -20,7 +20,7 @@ const steps = [
 
 export function HowItWorksSection() {
   return (
-    <section className="bg-primary py-16 text-primary-foreground md:py-20">
+    <section id="how-it-works" className="bg-primary py-16 text-primary-foreground md:py-20">
       <Container>
         <h2 className="text-center text-3xl font-semibold tracking-tight md:text-5xl">
           Simple steps to expert help
